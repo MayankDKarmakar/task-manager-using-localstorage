@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+:root {
+  --grad1: rgb(182, 40, 111);
+  --grad2: #ac2066;
+  --appcolor: #292f38;
+  --text1: aliceblue;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(100deg, var(--grad1) 50%, var(--grad2) 0);
+  font-family: "Ubuntu", "Alan Sans", sans-serif;
+}

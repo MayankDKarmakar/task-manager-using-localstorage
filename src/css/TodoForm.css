@@ -1,0 +1,36 @@
+.form {
+  margin-bottom: 20px;
+  margin-top: 30px;
+  /* background-color: antiquewhite; */
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form input {
+  padding: 10px 20px;
+  flex: 1;
+  /* border: 2px solid rgb(182, 40, 111); */
+  border: none;
+  box-shadow: 0px 0px 25px 2px var(--grad1);
+  outline: none;
+  border-radius: 7px;
+  background-color: var(--text1);
+  font-size: 0.95rem;
+}
+
+.form button {
+  padding: 7px 20px;
+  font-size: 0.95rem;
+  background-color: var(--grad1);
+  color: var(--text1);
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.form button:hover {
+  background-color: var(--grad2);
+}
