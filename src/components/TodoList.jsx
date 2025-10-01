@@ -1,14 +1,19 @@
 import React from "react";
 import "../css/TodoList.css";
-import { MdDelete } from "react-icons/md";
+import { MdDelete, MdEdit } from "react-icons/md";
 
 const TodoList = () => {
   return (
-    <div className="todo-list">
+    <ul className="todo-list">
       <li className="list-item">
-        <span>Todo1</span> <MdDelete />
+        <input type="checkbox" />
+        <span className="todo-text">Todo 1</span> <MdEdit /> <MdDelete />
       </li>
-    </div>
+      <li className="list-item">
+        <input type="checkbox" />
+        <span className="todo-text">Todo 2</span> <MdEdit /> <MdDelete />
+      </li>
+    </ul>
   );
 };
 

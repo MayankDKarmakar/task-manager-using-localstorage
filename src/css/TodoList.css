@@ -1,0 +1,32 @@
+.todo-list {
+  /* background-color: blueviolet; */
+  list-style-type: none;
+  width: 80%;
+  padding: 20px;
+}
+
+.list-item {
+  /* background-color: var(--grad1); */
+  border-bottom: 1px solid var(--grad1);
+  /* border-top: 1px solid var(--grad1); */
+  width: 100%;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 1px 0.1px var(--grad1);
+  margin-bottom: 5px;
+}
+
+.todo-text {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+input[type="checkbox"]:checked {
+  accent-color: var(--grad1);
+  transition: accent-color 0.3s ease-in-out;
+}

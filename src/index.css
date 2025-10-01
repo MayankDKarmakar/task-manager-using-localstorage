@@ -7,13 +7,29 @@
   --text1: aliceblue;
 }
 
-body {
+* {
   padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-sizing: border-box;
+}
+
+html {
   height: 100vh;
+}
+
+body {
+  height: 100%;
+  /* width: ; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   background: linear-gradient(100deg, var(--grad1) 50%, var(--grad2) 0);
+  background-repeat: no-repeat;
   font-family: "Ubuntu", "Alan Sans", sans-serif;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  /* position: relative; */
 }
