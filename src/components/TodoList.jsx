@@ -2,17 +2,16 @@ import React from "react";
 import "../css/TodoList.css";
 import { MdDelete, MdEdit } from "react-icons/md";
 
-const TodoList = () => {
+const TodoList = ({ todos }) => {
+  console.log(todos, "todoFOrm");
   return (
     <ul className="todo-list">
-      <li className="list-item">
-        <input type="checkbox" />
-        <span className="todo-text">Todo 1</span> <MdEdit /> <MdDelete />
-      </li>
-      <li className="list-item">
-        <input type="checkbox" />
-        <span className="todo-text">Todo 2</span> <MdEdit /> <MdDelete />
-      </li>
+      {todos.map((todo, index) => (
+        <li className="list-item" key={index}>
+          <input type="checkbox" />
+          <span className="todo-text">{todo.text}</span> <MdEdit /> <MdDelete />
+        </li>
+      ))}
     </ul>
   );
 };
