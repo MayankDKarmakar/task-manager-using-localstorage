@@ -34,12 +34,12 @@ input[type="checkbox"]:checked {
 .edit-todo {
   cursor: pointer;
   font-size: 16px;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 .delete-todo {
   cursor: pointer;
   font: 16px;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 
 .edit-todo:hover {
