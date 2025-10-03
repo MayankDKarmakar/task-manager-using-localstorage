@@ -1,32 +1,91 @@
+//--------------------------All imports------------------------//
 import "./App.css";
 import { useReducer, useState, useEffect } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
+//-----------------------Reducer Fn----------------------------//
 function todoReducer(todos, action) {
   switch (action.type) {
     case "ADD_TODO": {
       return [action.payload, ...todos];
     }
-    case "REMOVE_TODO":
-    case "UPDATE_TODO":
+    case "DELETE_TODO": {
+      return todos.filter((todo, index) => index !== action.payload);
+    }
+    case "UPDATE_TODO": {
+      return todos.map((todo, index) =>
+        index === action.payload.indexToBeEdited
+          ? action.payload.updatedTodo
+          : todo
+      );
+    }
+    default:
+      return todos;
   }
 }
 
-function App() {
-  const [todos, dispatch] = useReducer(todoReducer, []);
+//-----------------------App Component Start-------------------------------//
 
+function App() {
+  //-------------------useState hook--------------------------------//
+  const [editedTodo, setEditedTodo] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [indexToBeEdited, setIndexToBeEdited] = useState(null);
+  //-----------------useReducer hook--------------------------------//
+  const [todos, dispatch] = useReducer(
+    todoReducer,
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
+
+  //---------------use Effect to setItem to localStorage-----------//
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  //-------------------Handler Functions-------------------------//
   function addTodo(todo) {
     dispatch({ type: "ADD_TODO", payload: todo });
   }
 
+  function handleEditTodo(todo, index) {
+    // console.log(todo, "TODO to be edited");
+    setIndexToBeEdited(index);
+    setIsEditing(true);
+    setEditedTodo(todo.text);
+  }
+  function updateTodo(updatedTodo) {
+    dispatch({
+      type: "UPDATE_TODO",
+      payload: { updatedTodo, indexToBeEdited },
+    });
+    setEditedTodo("");
+    setIndexToBeEdited(null);
+    setIsEditing(false);
+  }
+
+  function deleteTodo(index) {
+    dispatch({ type: "DELETE_TODO", payload: index });
+  }
+
+  //---------------Return JSX-----------------------------------//
   return (
     <div className="container">
       <h1 className="header">Task Manager</h1>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <TodoForm
+        addTodo={addTodo}
+        isEditing={isEditing}
+        editedTodo={editedTodo}
+        updateTodo={updateTodo}
+      />
+      <TodoList
+        todos={todos}
+        handleEditTodo={handleEditTodo}
+        deleteTodo={deleteTodo}
+      />
     </div>
   );
 }
+//----------------------App Components Ends------------------------------//
 
 export default App;

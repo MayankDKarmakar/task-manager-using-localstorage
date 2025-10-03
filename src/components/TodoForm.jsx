@@ -1,31 +1,55 @@
-import React from "react";
+//--------------------------All imports------------------------//
+import React, { useEffect, useRef, useState } from "react";
 import "../css/TodoForm.css";
-import { useRef } from "react";
 
-const TodoForm = ({ addTodo, updateTodo }) => {
-  const inputRef = useRef(null);
+//---------------------TodoForm Components Starts-----------------//
 
+const TodoForm = ({ addTodo, isEditing, editedTodo, updateTodo }) => {
+  //----------------------useState Hook--------------------------//
+  const [todoText, setTodoText] = useState("");
+  const inputRef = useRef(null); // useRef hook
+
+  useEffect(() => {
+    if (isEditing) {
+      clearInputAndFocus();
+      setTodoText(editedTodo);
+    }
+  }, [editedTodo, isEditing]);
+
+  //----------------------Handler Fn-----------------------------//
   const handleAddTodo = (e) => {
     e.preventDefault();
 
-    if (inputRef.current.value) {
-      addTodo({ text: inputRef.current.value, completed: false });
+    if (isEditing) {
+      updateTodo({ text: todoText, completed: false });
+      clearInputAndFocus();
+      return;
+    } else if (todoText) {
+      addTodo({ text: todoText, completed: false });
     }
 
     clearInputAndFocus();
   };
-
+  //--------------clearInput and Focus funtion-------------------//
   const clearInputAndFocus = () => {
-    inputRef.current.value = "";
+    setTodoText("");
     inputRef.current.focus();
   };
 
+  //----------------------Return JSX------------------------------//
   return (
     <form className="form" onSubmit={handleAddTodo}>
-      <input ref={inputRef} type="text" placeholder="Add Task..." />
-      <button>Add</button>
+      <input
+        ref={inputRef}
+        onChange={(e) => setTodoText(e.target.value)}
+        value={todoText}
+        type="text"
+        placeholder="Add Task..."
+      />
+      <button>{isEditing ? "EDIT" : "ADD"}</button>
     </form>
   );
 };
 
+//------------------------TodoForm Component Ends-----------------------//
 export default TodoForm;
