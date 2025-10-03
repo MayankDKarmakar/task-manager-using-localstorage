@@ -49,3 +49,8 @@ input[type="checkbox"]:checked {
 .delete-todo:hover {
   color: var(--grad1);
 }
+.completed {
+  text-decoration: line-through;
+  text-decoration-color: var(--grad1);
+  text-decoration-thickness: 2px;
+}

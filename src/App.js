@@ -1,6 +1,6 @@
 //--------------------------All imports------------------------//
 import "./App.css";
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect, act } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
@@ -17,6 +17,13 @@ function todoReducer(todos, action) {
       return todos.map((todo, index) =>
         index === action.payload.indexToBeEdited
           ? action.payload.updatedTodo
+          : todo
+      );
+    }
+    case "TOGGLE_COMPLETE": {
+      return todos.map((todo, index) =>
+        index === action.payload
+          ? { ...todo, completed: !todo.completed }
           : todo
       );
     }
@@ -38,6 +45,7 @@ function App() {
     JSON.parse(localStorage.getItem("todos")) || []
   );
 
+  console.log(todos, "after toggle");
   //---------------use Effect to setItem to localStorage-----------//
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -68,6 +76,10 @@ function App() {
     dispatch({ type: "DELETE_TODO", payload: index });
   }
 
+  function toggleCompleted(index) {
+    dispatch({ type: "TOGGLE_COMPLETE", payload: index });
+  }
+
   //---------------Return JSX-----------------------------------//
   return (
     <div className="container">
@@ -82,6 +94,7 @@ function App() {
         todos={todos}
         handleEditTodo={handleEditTodo}
         deleteTodo={deleteTodo}
+        toggleCompleted={toggleCompleted}
       />
     </div>
   );
